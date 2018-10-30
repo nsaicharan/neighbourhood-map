@@ -36,7 +36,8 @@ class App extends Component {
         lat: 17.4409513,
         lng: 78.4985573
       }
-    ]
+    ],
+    isSidebarVisible: true
   };
 
   componentDidMount() {
@@ -52,10 +53,27 @@ class App extends Component {
     });
   }
 
+  toggleSidebar = e => {
+    e.preventDefault();
+
+    this.setState(state => {
+      return { isSidebarVisible: !state.isSidebarVisible };
+    });
+  };
+
   initMap = () => {
     const map = new window.google.maps.Map(document.getElementById("map"), {
       center: { lat: 17.43993, lng: 78.498276 },
-      zoom: 20
+      zoom: 20,
+      mapTypeControlOptions: {
+        position: window.google.maps.ControlPosition.TOP_RIGHT
+      },
+      fullscreenControlOptions: {
+        position: window.google.maps.ControlPosition.BOTTOM_RIGHT
+      },
+      zoomControlOptions: {
+        position: window.google.maps.ControlPosition.TOP_LEFT
+      }
     });
 
     var infowindow = new window.google.maps.InfoWindow();
@@ -82,10 +100,10 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <Header />
+        <Header toggleSidebar={this.toggleSidebar} />
         <Sidebar
           places={this.state.places}
-          sidebarVisible={this.state.sidebarVisible}
+          isSidebarVisible={this.state.isSidebarVisible}
         />
         <div id="map" />
       </div>
