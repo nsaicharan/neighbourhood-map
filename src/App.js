@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import "./App.css";
+import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import "./App.scss";
 
 class App extends Component {
   state = {
@@ -15,6 +17,11 @@ class App extends Component {
         lng: 78.48092249999999
       },
       {
+        name: "Paradise Restaurant",
+        lat: 17.4417195,
+        lng: 78.4872914
+      },
+      {
         name: "Birla Temple",
         lat: 17.4033,
         lng: 78.4707
@@ -23,11 +30,6 @@ class App extends Component {
         name: "Jalavihar Water Park",
         lat: 17.4326,
         lng: 78.4648
-      },
-      {
-        name: "Paradise Restaurant",
-        lat: 17.4417195,
-        lng: 78.4872914
       },
       {
         name: "Clock Tower",
@@ -53,7 +55,7 @@ class App extends Component {
   initMap = () => {
     const map = new window.google.maps.Map(document.getElementById("map"), {
       center: { lat: 17.43993, lng: 78.498276 },
-      zoom: 16
+      zoom: 20
     });
 
     var infowindow = new window.google.maps.InfoWindow();
@@ -79,7 +81,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="app">
+        <Header />
+        <Sidebar
+          places={this.state.places}
+          sidebarVisible={this.state.sidebarVisible}
+        />
         <div id="map" />
       </div>
     );
