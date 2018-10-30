@@ -2,6 +2,41 @@ import React, { Component } from "react";
 import "./App.css";
 
 class App extends Component {
+  state = {
+    places: [
+      {
+        name: "Hussain Sagar",
+        lat: 17.42388,
+        lng: 78.473824
+      },
+      {
+        name: "Snow World",
+        lat: 17.4145708,
+        lng: 78.48092249999999
+      },
+      {
+        name: "Birla Temple",
+        lat: 17.4033,
+        lng: 78.4707
+      },
+      {
+        name: "Jalavihar Water Park",
+        lat: 17.4326,
+        lng: 78.4648
+      },
+      {
+        name: "Paradise Restaurant",
+        lat: 17.4417195,
+        lng: 78.4872914
+      },
+      {
+        name: "Clock Tower",
+        lat: 17.4409513,
+        lng: 78.4985573
+      }
+    ]
+  };
+
   componentDidMount() {
     const key = "AIzaSyBPgrEBcYtfVq98DJDibH7jtoj8xjyXIRU";
     const script = document.createElement("script");
@@ -17,9 +52,29 @@ class App extends Component {
 
   initMap = () => {
     const map = new window.google.maps.Map(document.getElementById("map"), {
-      center: { lat: -34.397, lng: 150.644 },
-      zoom: 8
+      center: { lat: 17.43993, lng: 78.498276 },
+      zoom: 16
     });
+
+    var infowindow = new window.google.maps.InfoWindow();
+    var bounds = new window.google.maps.LatLngBounds();
+
+    this.state.places.forEach(place => {
+      var marker = new window.google.maps.Marker({
+        position: { lat: place.lat, lng: place.lng },
+        map: map,
+        title: place.name
+      });
+
+      marker.addListener("click", function() {
+        infowindow.open(map, marker);
+        infowindow.setContent(`<div>${place.name}</div>`);
+      });
+
+      bounds.extend({ lat: place.lat, lng: place.lng });
+    });
+
+    map.fitBounds(bounds);
   };
 
   render() {
