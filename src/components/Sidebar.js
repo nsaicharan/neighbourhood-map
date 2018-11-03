@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export default class Sidebar extends Component {
+class Sidebar extends Component {
   render() {
     return (
       <aside
@@ -14,7 +14,12 @@ export default class Sidebar extends Component {
           <label htmlFor="filter-input" className="sr-only">
             Filter Places
           </label>
-          <input type="text" placeholder="Filter Places" id="filter-input" />
+          <input
+            type="text"
+            placeholder="Filter Places"
+            id="filter-input"
+            onChange={this.props.filter}
+          />
         </form>
 
         <ul className="places-list">
@@ -28,3 +33,5 @@ export default class Sidebar extends Component {
     );
   }
 }
+
+export default Sidebar;
