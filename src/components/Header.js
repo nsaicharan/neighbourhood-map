@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export default function Header(props) {
   return (
@@ -15,3 +16,7 @@ export default function Header(props) {
     </header>
   );
 }
+
+Header.propTypes = {
+  toggleSidebar: PropTypes.func
+};

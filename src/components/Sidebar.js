@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class Sidebar extends Component {
   render() {
@@ -33,5 +34,11 @@ class Sidebar extends Component {
     );
   }
 }
+
+Sidebar.propTypes = {
+  filter: PropTypes.func,
+  isSidebarVisible: PropTypes.bool,
+  places: PropTypes.array
+};
 
 export default Sidebar;

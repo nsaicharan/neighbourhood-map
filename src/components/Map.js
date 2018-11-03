@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class Map extends Component {
   componentDidMount() {
@@ -60,5 +61,9 @@ class Map extends Component {
     return <main id="map" aria-label="map" role="application" />;
   }
 }
+
+Map.propTypes = {
+  places: PropTypes.array
+};
 
 export default Map;

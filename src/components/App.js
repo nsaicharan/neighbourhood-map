@@ -14,6 +14,10 @@ class App extends Component {
     this.setState({ places });
   }
 
+  filterPlaces = e => {
+    console.log(e.target.value);
+  };
+
   toggleSidebar = e => {
     e.preventDefault();
 
@@ -30,7 +34,7 @@ class App extends Component {
         <Sidebar
           places={this.state.places}
           isSidebarVisible={this.state.isSidebarVisible}
-          filter={this.filter}
+          filter={this.filterPlaces}
         />
 
         <Map places={this.state.places} />
