@@ -3,16 +3,21 @@ import PropTypes from "prop-types";
 
 export default function Header(props) {
   return (
-    <header className="site-header">
-      <a href="#" className="menu" onClick={props.toggleSidebar}>
-        <span className="menu__bar" aria-hidden="true" />
-        <span className="menu__bar" aria-hidden="true" />
-        <span className="menu__bar" aria-hidden="true" />
+    <header className="app-header">
+      <div
+        role="button"
+        tabIndex="0"
+        className="menu-btn"
+        onClick={props.toggleSidebar}
+      >
+        <span className="menu-btn__bar" aria-hidden="true" />
+        <span className="menu-btn__bar" aria-hidden="true" />
+        <span className="menu-btn__bar" aria-hidden="true" />
 
         <span className="sr-only">Toggle Side Navigation</span>
-      </a>
+      </div>
 
-      <h1 className="site-title">Spots Near Secunderabad</h1>
+      <h1 className="app-title">Spots Near Secunderabad</h1>
     </header>
   );
 }

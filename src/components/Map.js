@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 class Map extends Component {
+  state = {
+    markers: []
+  }
+
   componentDidMount() {
     const key = "AIzaSyBPgrEBcYtfVq98DJDibH7jtoj8xjyXIRU";
     const script = document.createElement("script");
@@ -12,6 +16,19 @@ class Map extends Component {
 
     script.addEventListener("load", () => {
       this.initMap();
+    });
+  }
+
+  componentDidUpdate() {
+    const markers = [...this.state.markers];
+    
+    // Update the visibility of markers
+    markers.forEach(marker => {
+      if (this.props.places.some(place => place.name === marker.title)) {
+        marker.setVisible(true);
+      } else {
+        marker.setVisible(false);
+      }
     });
   }
 
@@ -30,8 +47,8 @@ class Map extends Component {
       }
     });
 
-    var infowindow = new window.google.maps.InfoWindow();
-    var bounds = new window.google.maps.LatLngBounds();
+    const infoWindow = new window.google.maps.InfoWindow();
+    const bounds = new window.google.maps.LatLngBounds();
 
     this.props.places.forEach(place => {
       var marker = new window.google.maps.Marker({
@@ -44,9 +61,13 @@ class Map extends Component {
       });
 
       marker.addListener("click", function() {
-        infowindow.open(map, marker);
-        infowindow.setContent(`<div>${place.name}</div>`);
+        infoWindow.open(map, marker);
+        infoWindow.setContent(`<div>${place.name}</div>`);
       });
+
+      this.setState(state => ({
+        markers: [...state.markers, marker]
+      }))
 
       bounds.extend({
         lat: place.lat,

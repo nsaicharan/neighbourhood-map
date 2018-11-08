@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Map from "./Map";
-import places from "../places";
+import placesInfo from "../placesInfo";
 
 class App extends Component {
   state = {
@@ -11,19 +11,25 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.setState({ places });
+    this.setState({ places: placesInfo });
   }
 
   filterPlaces = e => {
-    console.log(e.target.value);
+    const query = e.target.value.toLowerCase().trim();
+
+    this.setState({
+      places: placesInfo.filter(place =>
+        place.name.toLowerCase().includes(query)
+      )
+    });
   };
 
   toggleSidebar = e => {
     e.preventDefault();
 
-    this.setState(state => {
-      return { isSidebarVisible: !state.isSidebarVisible };
-    });
+    this.setState(state => ({
+      isSidebarVisible: !state.isSidebarVisible
+    }));
   };
 
   render() {
@@ -35,6 +41,7 @@ class App extends Component {
           places={this.state.places}
           isSidebarVisible={this.state.isSidebarVisible}
           filter={this.filterPlaces}
+          openRelatedInfoWindow={this.openRelatedInfoWindow}
         />
 
         <Map places={this.state.places} />

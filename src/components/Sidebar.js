@@ -6,9 +6,7 @@ class Sidebar extends Component {
     return (
       <aside
         className={
-          this.props.isSidebarVisible
-            ? "site-sidebar"
-            : "site-sidebar is-hidden"
+          this.props.isSidebarVisible ? "app-sidebar" : "app-sidebar is-hidden"
         }
       >
         <form action="#">
@@ -16,16 +14,16 @@ class Sidebar extends Component {
             Filter Places
           </label>
           <input
-            type="text"
+            type="search"
             placeholder="Filter Places"
             id="filter-input"
             onChange={this.props.filter}
           />
         </form>
 
-        <ul className="places-list">
+        <ul className="places-list" role="listbox">
           {this.props.places.map((place, i) => (
-            <li className="places-list__item" key={i}>
+            <li className="places-list__item" role="option" key={i}>
               {place.name}
             </li>
           ))}

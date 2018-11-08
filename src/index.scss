@@ -7,17 +7,22 @@
 }
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: inherit;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 body {
-  margin: 0;
-  padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
+  font-size: 1.6rem;
   color: var(--color-primary);
   box-sizing: border-box;
 }
@@ -47,86 +52,96 @@ body {
     "sidebar map";
 }
 
-.site-header {
+.app-header {
   grid-area: header;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.06);
-  margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
+  margin-bottom: 1rem;
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.06);
 }
 
-.menu {
-  width: 24px;
-  height: 16px;
-  margin-left: 1rem;
+.menu-btn {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 3.4rem;
+  height: 2.4rem;
+  padding: 0.5rem;
+  margin-left: 1.6rem;
+  cursor: pointer;
+  outline: 1px solid transparent;
+  transition: 0.1s;
+
+  &:focus {
+    outline-color: var(--color-secondary);
+  }
 
   &__bar {
     display: block;
-    height: 2px;
+    height: 0.2rem;
     width: 100%;
     background: var(--color-primary);
   }
 }
 
-.site-title {
-  font-size: 1.4rem;
-  text-align: center;
-  font-weight: 400;
-  letter-spacing: 0.75px;
-  margin: 0.8rem 0 1rem;
+.app-title {
   flex: 1;
+  margin: 1.2rem 0 1.6rem;
+  font-size: 2.2rem;
+  font-weight: 400;
+  letter-spacing: 0.075rem;
+  text-align: center;
 
   @media screen and (min-width: 37.5em) {
-    font-size: 2rem;
+    font-size: 3.2rem;
   }
 }
 
-.site-sidebar {
+.app-sidebar {
   grid-area: sidebar;
-  width: 16rem;
-  padding-left: 0.8rem;
-  margin-bottom: 1rem;
+  width: 27rem;
+  padding: 1.6rem 0.2rem 1.6rem 1.6rem;
   text-align: left;
   overflow-x: hidden;
   backface-visibility: hidden;
   transition: 0.6s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-.site-sidebar.is-hidden {
+.app-sidebar.is-hidden {
   width: 0;
-  padding-left: 0;
+  padding: 0;
   opacity: 0;
-  transform: translateX(200%);
+  transform: translate3d(200%, 0, 0);
 }
 
 #filter-input {
   display: block;
   width: 100%;
-  margin: 1rem 0;
-  padding: 0.6rem 1rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.6rem;
   font-family: inherit;
-  font-size: 1.15rem;
+  font-size: 1.8rem;
   color: inherit;
   outline: none;
-  border: 1px solid var(--color-grey);
+  border: 0.1rem solid var(--color-grey);
   transition: 0.1s;
 
   &:hover,
   &:focus {
     border-color: var(--color-secondary);
   }
+
+  &::-webkit-search-cancel-button {
+    margin-left: 1rem;
+  }
 }
 
 .places-list {
-  padding: 0;
-  list-style-type: none;
+  list-style: none;
 
   &__item {
     width: 100%;
-    padding: 0.7rem 1rem;
+    padding: 1.2rem 1.6rem;
     cursor: pointer;
 
     &:hover {
@@ -137,8 +152,8 @@ body {
 
 #map {
   grid-area: map;
-  min-height: 360px;
-  margin: 1rem;
+  min-height: 36rem;
+  margin: 1.6rem;
 }
 
 // Found this class by inspecting Google map. Added delay to stop mapTypeControlOptions from flickering while toggling sidebar.

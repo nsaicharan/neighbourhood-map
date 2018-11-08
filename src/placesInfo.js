@@ -1,4 +1,4 @@
-const places = [
+const placesList = [
   {
     name: "Hussain Sagar",
     lat: 17.42388,
@@ -31,4 +31,4 @@ const places = [
   }
 ];
 
-export default places;
+export default placesList;
