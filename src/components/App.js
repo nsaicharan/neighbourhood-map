@@ -7,14 +7,20 @@ import placesInfo from "../placesInfo";
 class App extends Component {
   state = {
     places: [],
-    isSidebarVisible: true
+    isSidebarVisible: false
   };
 
   componentDidMount() {
     this.setState({ places: placesInfo });
+
+    // Set the value of isSidebarVisible to true if the app is opened on large screens
+    if (window.matchMedia("(min-width: 800px)").matches) {
+      this.setState({ isSidebarVisible: true });
+    }
   }
 
   filterPlaces = e => {
+    e.preventDefault();
     const query = e.target.value.toLowerCase().trim();
 
     this.setState({
@@ -24,9 +30,7 @@ class App extends Component {
     });
   };
 
-  toggleSidebar = e => {
-    e.preventDefault();
-
+  toggleSidebar = () => {
     this.setState(state => ({
       isSidebarVisible: !state.isSidebarVisible
     }));

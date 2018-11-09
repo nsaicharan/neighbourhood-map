@@ -9,6 +9,7 @@ export default function Header(props) {
         tabIndex="0"
         className="menu-btn"
         onClick={props.toggleSidebar}
+        onKeyUp={e => (e.key === "Enter" ? props.toggleSidebar() : "")}
       >
         <span className="menu-btn__bar" aria-hidden="true" />
         <span className="menu-btn__bar" aria-hidden="true" />
