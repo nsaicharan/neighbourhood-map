@@ -32,6 +32,23 @@ class App extends Component {
     }));
   };
 
+  handlePlaceClick = e => {
+    const placeslistItems = e.target.parentNode.children;
+    console.log("placeslistItems", placeslistItems);
+
+    // Set aria-selected as false for all places
+    Array.from(placeslistItems).forEach(item =>
+      item.setAttribute("aria-selected", false)
+    );
+
+    // Set aria-selected as true for the current clicked place
+    e.target.setAttribute("aria-selected", true);
+
+    // Activate related info window
+    const placeName = e.target.innerText;
+    this.mapComponent.triggerInfoWindow(placeName);
+  };
+
   render() {
     return (
       <div className="app">
@@ -41,10 +58,13 @@ class App extends Component {
           places={this.state.places}
           isSidebarVisible={this.state.isSidebarVisible}
           filter={this.filterPlaces}
-          openRelatedInfoWindow={this.openRelatedInfoWindow}
+          handlePlaceClick={this.handlePlaceClick}
         />
 
-        <Map places={this.state.places} />
+        <Map
+          ref={map => (this.mapComponent = map)}
+          places={this.state.places}
+        />
       </div>
     );
   }

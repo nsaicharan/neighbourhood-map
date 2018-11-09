@@ -23,7 +23,17 @@ class Sidebar extends Component {
 
         <ul className="places-list" role="listbox">
           {this.props.places.map((place, i) => (
-            <li className="places-list__item" role="option" key={i}>
+            <li
+              className="places-list__item"
+              role="option"
+              aria-selected="false"
+              tabIndex="0"
+              key={i}
+              onClick={this.props.handlePlaceClick}
+              onKeyUp={e =>
+                e.key === "Enter" ? this.props.handlePlaceClick(e) : ""
+              }
+            >
               {place.name}
             </li>
           ))}
